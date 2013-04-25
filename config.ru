@@ -5,6 +5,8 @@ require 'thread'
 Faye::WebSocket.load_adapter('thin')
 bayeux = Faye::RackAdapter.new(:mount => '/faye', :timeout => 25)
 
+use Rack::Static, :urls => ["/js", "/css", "/img", "/index.html"], :root => "public", :index => "index.html"
+
 mutex = Mutex.new
 
 Thread.new {

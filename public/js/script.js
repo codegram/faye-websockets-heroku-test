@@ -2,9 +2,8 @@ $(document).ready(function() {
     var user = prompt("Enter your name, please.");
     $("#username").text(user);
     var channel = "/private/" + user;
-    console.log("User channel is " + channel);
 
-    var client = new Faye.Client('http://localhost:9292/faye');
+    var client = new Faye.Client('/faye');
 
     var lastBid = 0;
     var highestBid = 0;
@@ -31,8 +30,7 @@ $(document).ready(function() {
     });
 
     client.subscribe(channel, function(message) {
-        if(message.error) return log(message.error);
-        return console.log(message);
+        if(message.error) log(message.error);
     });
 
     $("form#bidding input#bid").click(function() {
