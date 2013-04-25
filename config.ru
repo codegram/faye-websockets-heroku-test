@@ -2,6 +2,8 @@ require 'bundler/setup'
 require 'faye'
 require 'thread'
 
+$stdout.sync = true if ENV["RACK_ENV"] == 'development'
+
 Faye::WebSocket.load_adapter('thin')
 bayeux = Faye::RackAdapter.new(:mount => '/faye', :timeout => 25)
 
