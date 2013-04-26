@@ -17,7 +17,7 @@ Thread.new {
 
   client.subscribe('/private/*') do |bid|
     mutex.synchronize do
-      if !bid["error"] && bid["amount"] > highest_bid
+      if bid["amount"] && !bid["error"] && bid["amount"] > highest_bid
         highest_bid = bid["amount"]
         client.publish('/bids', bid)
       else
